@@ -7,6 +7,7 @@ University lab: how prompt wording and generation parameters change image qualit
 ## Hardware and models
 
 - Local RTX 3060 Ti, 8 GB VRAM. CUDA/PyTorch are already set up; no install help unless asked. No paid APIs.
+- Environment: everything lives in `LAB1/.venv` (Python 3.12.10). PyTorch 2.11.0 built for CUDA 12.8 (`+cu128`); driver supports CUDA 13.4. Pinned in `requirements.txt`. Install only into this venv, never system Python.
 - Images: `stable-diffusion-v1-5/stable-diffusion-v1-5` via diffusers (the mirror; the `runwayml` repo no longer exists).
 - Audio: `facebook/musicgen-small` via transformers, plus Python post-processing (resampling to change the sampling rate, simple EQ filter).
 - fp16. Add attention slicing or CPU offload only if VRAM actually runs out.
