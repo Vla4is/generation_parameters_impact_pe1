@@ -1,6 +1,6 @@
 # Kickstart (temporary, one-time task)
 
-Build the two baseline notebooks, `images.ipynb` and `audio.ipynb`. Nothing else.
+Build the two baseline notebooks, `images.ipynb` and `audio.ipynb`.
 
 ## Cell order (both notebooks)
 
