@@ -1,0 +1,2 @@
+group,prompt,negative_prompt,seed,steps,cfg,resolution,scheduler,hash,filename,rating,notes
+baseline,"wooden cabin, red canoe on the left shore, two pine trees, mountains reflected in the lake, golden sunset light, no people, no text",,42,30,7.5,512x512,PNDM,fa08e11e,baseline_fa08e11e.png,,

@@ -1,0 +1,3 @@
+group,prompt,seed,duration,temperature,guidance,top_k,hash,filename,rating,notes
+baseline,"calm lakeside evening ambient music, slow tempo around 60 BPM, soft piano and strings, atmospheric",42,10,1.0,3.0,250,5acd3722,baseline_5acd3722.wav,,
+baseline,"calm lakeside evening ambient music, slow tempo around 60 BPM, soft piano and strings, atmospheric",40,40,1.3,3.0,250,e7f98321,baseline_e7f98321.wav,,

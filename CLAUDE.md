@@ -21,7 +21,7 @@ This file covers the machine and how we work. Project specifics (models, noteboo
 
 ## Code style
 
-- Jupyter notebooks only.
+- Jupyter notebooks, plus one plain Python file that holds all the functions. The notebooks import from it and define no functions themselves.
 - Short and simple: no classes, minimal functions, comments only where they help.
 
 ## Working rules
