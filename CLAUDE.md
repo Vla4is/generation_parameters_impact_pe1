@@ -1,7 +1,6 @@
 # LAB1: prompt engineering and generation parameters
 
-@.claude/kickstart.md
-@.claude/open-questions.md
+
 
 University lab: how prompt wording and generation parameters change image quality and audio quality. Vlad does the experiments, ratings, analysis and presentation himself.
 
