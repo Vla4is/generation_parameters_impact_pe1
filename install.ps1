@@ -1,4 +1,4 @@
-# Sets up LAB1 from scratch: the .venv, the packages, and both models (saved into models/).
+# Sets up LAB1 from scratch: the .venv, the packages, and all three models (saved into models/).
 # Needs Python 3.12, git and an NVIDIA GPU. Run from the LAB1 folder:
 #   powershell -ExecutionPolicy Bypass -File install.ps1
 
@@ -16,7 +16,7 @@ if ($LASTEXITCODE -ne 0) { Write-Host "Package install failed."; exit 1 }
 @'
 import torch
 from diffusers import StableDiffusionPipeline
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, pipeline
 from parler_tts import ParlerTTSForConditionalGeneration
 
 StableDiffusionPipeline.from_pretrained(
@@ -24,6 +24,9 @@ StableDiffusionPipeline.from_pretrained(
     safety_checker=None, requires_safety_checker=False, cache_dir="models")
 AutoTokenizer.from_pretrained("parler-tts/parler-tts-mini-v1", cache_dir="models")
 ParlerTTSForConditionalGeneration.from_pretrained("parler-tts/parler-tts-mini-v1", cache_dir="models")
-print("Done: both models are in models/. CUDA available:", torch.cuda.is_available())
+# speech recognition check (recognize_all in helpers.py)
+pipeline("automatic-speech-recognition", model="facebook/wav2vec2-large-960h-lv60-self",
+         model_kwargs={"cache_dir": "models"})
+print("Done: all three models are in models/. CUDA available:", torch.cuda.is_available())
 '@ | .venv\Scripts\python -
 if ($LASTEXITCODE -ne 0) { Write-Host "Model download failed."; exit 1 }

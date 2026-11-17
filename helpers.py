@@ -47,3 +47,25 @@ def audio_stats(folder, csv_path, frame_rate, num_codebooks):
     for r in rows:
         print(f"{r['filename']:24s} {r['seconds']:6.1f}s {r['steps']:6d} steps {r['tokens']:7d} tokens")
     return rows
+
+
+def recognize_all(folder, results_csv, out_csv, model_name="facebook/wav2vec2-large-960h-lv60-self"):
+    """Wav2Vec2 transcript of every wav in folder, next to the "text" we asked for in results_csv.
+    Rewrites its own csv each time (transcripts only, no ratings)."""
+    from scipy.io import wavfile
+    from transformers import pipeline
+    with open(results_csv, newline="", encoding="utf-8") as f:
+        original = {r["filename"]: r["text"] for r in csv.DictReader(f)}
+    asr = pipeline("automatic-speech-recognition", model=model_name, device="cuda",
+                   model_kwargs={"cache_dir": "models"})
+    rows = []
+    for wav in sorted(Path(folder).glob("*.wav"), key=lambda p: p.stat().st_mtime):
+        rate, audio = wavfile.read(wav)
+        heard = asr({"raw": audio.astype("float32"), "sampling_rate": rate})["text"].lower()
+        rows.append({"filename": wav.name, "original": original.get(wav.name, ""), "heard": heard})
+        print(f"{wav.name}\n  original: {rows[-1]['original']}\n  heard:    {heard}")
+    with open(out_csv, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["filename", "original", "heard"])
+        writer.writeheader()
+        writer.writerows(rows)
+    return rows
